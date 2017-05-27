@@ -6,6 +6,7 @@
 <%@ page import = "org.apache.commons.fileupload.disk.*" %>
 <%@ page import = "org.apache.commons.fileupload.servlet.*" %>
 <%@ page import = "org.apache.commons.io.output.*" %>
+<%@ page import = "java.sql.*" %>
 <%
    File file ;
    int maxFileSize = 5000 * 1024;
@@ -63,8 +64,18 @@
                fi.write( file ) ;
                out.println("Uploaded Filename: " + filePath + 
                fileName + "<br>");
+               Class.forName("com.mysql.jdbc.Driver");
+               Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/ggxlogs?" +
+              	                                   "user=root&password=xxx@123");
+               PreparedStatement stmt=conn.prepareStatement("insert into new_table values(?)");
+               stmt.setBinaryStream(1, new FileInputStream(file));
+               stmt.executeUpdate();
+               
             }
          }
+        
+         
+
          out.println("</body>");
          out.println("</html>");
       } catch(Exception ex) {
