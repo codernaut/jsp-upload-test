@@ -67,8 +67,8 @@
                
                Class.forName("com.mysql.jdbc.Driver");
                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/ggxlogs?" +
-              	                                   "user=root&password=Lmkr@123");
-               PreparedStatement stmt=conn.prepareStatement("insert into ggxlogs.new_table values(?)");
+              	                                   "user=root&password=xxxx@123");
+               PreparedStatement stmt=conn.prepareStatement("insert into new_table values(?)");
                stmt.setBinaryStream(1, new FileInputStream(file));
                stmt.executeUpdate();
                
